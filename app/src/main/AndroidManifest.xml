@@ -30,7 +30,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controller.activity.MainActivity"></activity>
+        <activity android:name=".controller.activity.MainActivity" />
         <!-- 设置环信应用的AppKey -->
         <meta-data
             android:name="EASEMOB_APPKEY"
@@ -64,7 +64,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.activity.LoginActivity"></activity>
+        <activity android:name=".controller.activity.LoginActivity" />
+        <activity android:name=".controller.activity.RegisterActivity"></activity>
     </application>
 
 </manifest>
