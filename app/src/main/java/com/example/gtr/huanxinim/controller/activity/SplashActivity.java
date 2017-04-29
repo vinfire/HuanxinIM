@@ -6,14 +6,18 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.gtr.huanxinim.R;
 import com.example.gtr.huanxinim.modle.Model;
+import com.example.gtr.huanxinim.modle.bean.UserInfo;
 import com.hyphenate.chat.EMClient;
 
 public class SplashActivity extends Activity {
+
+    private static final String TAG = "SplashActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +27,7 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.activity_splash);
         
         //发送延时消息
-        handler.sendMessageDelayed(Message.obtain(), 1500);
+        handler.sendMessageDelayed(Message.obtain(), 2000);
     }
 
     private Handler handler = new Handler(){
@@ -52,9 +56,14 @@ public class SplashActivity extends Activity {
                 //判断当前帐号是否已经登录过
                 if (EMClient.getInstance().isLoggedInBefore()){  //登录过
                     //获取到当前登录用户的信息
-
-                    //跳转到主页面
-                    goToMain();
+                    UserInfo account = Model.getInstance().getUserAccountDao().getAccountByHxId(EMClient.getInstance().getCurrentUser());
+                    if (account == null){
+                        //跳转到登录页面
+                        goToLogin();
+                    }else {
+                        //跳转到主页面
+                        goToMain();
+                    }
                 }else {  //未登录过
                     //跳转到登录页面
                     goToLogin();
