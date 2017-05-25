@@ -16,11 +16,13 @@ public class UserAccountDBHelper extends SQLiteOpenHelper {
         super(context, "account.db", null, 1);
     }
 
+    //数据库创建的时候调用
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(UserAccountTable.CREATE_TAB);
     }
 
+    //数据库更新的时候调用
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 

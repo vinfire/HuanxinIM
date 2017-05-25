@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,9 +16,12 @@ import com.example.gtr.huanxinim.modle.Model;
 import com.example.gtr.huanxinim.modle.bean.UserInfo;
 import com.hyphenate.chat.EMClient;
 
+import java.lang.ref.WeakReference;
+
 public class SplashActivity extends Activity {
 
     private static final String TAG = "SplashActivity";
+    private Handler mHandler = new InnerHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,20 +31,34 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.activity_splash);
         
         //发送延时消息
-        handler.sendMessageDelayed(Message.obtain(), 2000);
+        mHandler.sendMessageDelayed(Message.obtain(), 3000);
     }
 
-    private Handler handler = new Handler(){
+    /**
+     * 声明一个静态的 Handler 内部类，并持有外部类的弱引用
+     */
+    private static class InnerHandler extends Handler{
+
+        private WeakReference<SplashActivity> mActivity;
+
+        public InnerHandler(SplashActivity activity){
+            mActivity = new WeakReference<SplashActivity>(activity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
-            //如果当前activity已经退出，那么就不处理handler中的消息
-            if (isFinishing()){
-                return;
+            SplashActivity activity = mActivity.get();
+            if (activity != null){
+                //如果当前activity已经退出，那么就不处理handler中的消息
+                if (activity.isFinishing()){
+                    return;
+                }
+                //判断进入主页面还是登录页面
+                activity.toMainOrLogin();
             }
-            //判断进入主页面还是登录页面
-            toMainOrLogin();
         }
-    };
+
+    }
 
     private void toMainOrLogin() {
 //        new Thread(new Runnable() {
@@ -84,7 +102,8 @@ public class SplashActivity extends Activity {
 
     @Override
     protected void onDestroy() {
-        handler.removeCallbacksAndMessages(null);
+        //移除Handler的所有消息
+        mHandler.removeCallbacksAndMessages(null);
         super.onDestroy();
     }
 }

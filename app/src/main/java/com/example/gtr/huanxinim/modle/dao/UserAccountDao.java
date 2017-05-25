@@ -9,7 +9,7 @@ import com.example.gtr.huanxinim.modle.bean.UserInfo;
 import com.example.gtr.huanxinim.modle.db.UserAccountDBHelper;
 
 /**
- * Created by GTR on 2017/4/22.
+ * 用户账号数据库的操作类
  */
 
 public class UserAccountDao {

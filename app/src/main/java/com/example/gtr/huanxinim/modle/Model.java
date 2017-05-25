@@ -16,6 +16,7 @@ public class Model {
     private Context mContext;
     private ExecutorService executors = Executors.newCachedThreadPool();
     private UserAccountDao userAccountDao;
+
     private static Model model = null;
 
     private Model(){

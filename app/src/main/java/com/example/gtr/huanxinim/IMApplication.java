@@ -5,6 +5,8 @@ import android.app.Application;
 import com.example.gtr.huanxinim.modle.Model;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
 
 
 /**

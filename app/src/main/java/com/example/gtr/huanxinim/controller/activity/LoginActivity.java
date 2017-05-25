@@ -18,10 +18,10 @@ import com.hyphenate.exceptions.HyphenateException;
 
 public class LoginActivity extends Activity{
 
-    private EditText et_login_name;
-    private EditText et_login_password;
-    private Button btn_login_regist;
-    private Button btn_login_login;
+    private EditText mEtLoginName;
+    private EditText mEtLoginPassword;
+    private Button mBtnLoginResist;
+    private Button mBtnLoginLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,21 +34,21 @@ public class LoginActivity extends Activity{
     }
 
     private void initView() {
-        et_login_name = (EditText) findViewById(R.id.et_login_name);
-        et_login_password = (EditText) findViewById(R.id.et_login_password);
-        btn_login_regist = (Button) findViewById(R.id.btn_login_regist);
-        btn_login_login = (Button) findViewById(R.id.btn_login_login);
+        mEtLoginName = (EditText) findViewById(R.id.et_login_name);
+        mEtLoginPassword = (EditText) findViewById(R.id.et_login_password);
+        mBtnLoginResist = (Button) findViewById(R.id.btn_login_regist);
+        mBtnLoginLogin = (Button) findViewById(R.id.btn_login_login);
     }
 
     private void initListener() {
-        btn_login_login.setOnClickListener(new View.OnClickListener() {
+        mBtnLoginLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 login();
             }
         });
 
-        btn_login_regist.setOnClickListener(new View.OnClickListener() {
+        mBtnLoginResist.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 regist();
@@ -59,8 +59,8 @@ public class LoginActivity extends Activity{
     //登录的逻辑处理
     private void login() {
         // 1.获取输入的用户名和密码
-        final String loginName = et_login_name.getText().toString();
-        final String loginPwd = et_login_password.getText().toString();
+        final String loginName = mEtLoginName.getText().toString();
+        final String loginPwd = mEtLoginPassword.getText().toString();
         // 2.校验输入的用户名和密码
         if (TextUtils.isEmpty(loginName) || TextUtils.isEmpty(loginPwd)){
             Toast.makeText(LoginActivity.this, "用户名或密码不能为空！",Toast.LENGTH_SHORT).show();
@@ -119,8 +119,8 @@ public class LoginActivity extends Activity{
     //注册的逻辑处理
     private void regist() {
         // 1.获取输入的用户名和密码
-        final String registName = et_login_name.getText().toString();
-        final String registPwd = et_login_password.getText().toString();
+        final String registName = mEtLoginName.getText().toString();
+        final String registPwd = mEtLoginPassword.getText().toString();
         // 2.校验输入的用户名和密码
         if (TextUtils.isEmpty(registName) || TextUtils.isEmpty(registPwd)){
             Toast.makeText(LoginActivity.this, "用户名或密码不能为空！",Toast.LENGTH_SHORT).show();
